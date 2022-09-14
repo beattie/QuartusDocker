@@ -4,6 +4,8 @@ FROM ubuntu:16.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
+ARG REALUSER
+
 ARG QUARTUS=QuartusLiteSetup-18.1.0.625-linux.run
 ARG CYCLONE=cyclone-18.1.0.625.qdz
 
@@ -28,7 +30,7 @@ RUN apt-get update && \
 # create a normal user so we're not running as root
 RUN export uid=1000 gid=1000 && \
     mkdir -p /home/developer && \
-    mkdir -p /home/beattie && \
+    mkdir -p /home/$REALUSER && \
     echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
     echo "developer:x:${uid}:" >> /etc/group && \
     echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
