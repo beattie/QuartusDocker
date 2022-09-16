@@ -31,7 +31,8 @@ quartus () {
 }
 ~~~~
 The image _quartus-installer:13.1__ and the container _quartus-base-container_
-can now be removed.
+can now be removed. `docker rmi -f quartus-installer:13.1` and
+`docker rm quartus-base-container` respectively.
 
 **NB: the message "You must have the 32bit..." is an artifact of using Ubuntu
 which the installer does not understand and can safely be ignored**
