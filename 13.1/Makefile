@@ -11,7 +11,7 @@ image_built: ${INSTALLER}
 	touch image_built
 
 commit:
-	docker commit quartus-base-container quartus:13.1
+	docker commit --change='CMD /opt/altera/quartus/bin/quartus' quartus-base-container quartus:13.1
 
 ${INSTALLER}:
 	wget $(INSTALLER_URL)

@@ -35,3 +35,5 @@ can now be removed.
 
 **NB: the message "You must have the 32bit..." is an artifact of using Ubuntu
 which the installer does not understand and can safely be ignored**
+
+**NB2: the commit step takes a long time so is kept seperate**
