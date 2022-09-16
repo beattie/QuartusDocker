@@ -2,18 +2,19 @@ Build an image for Quartus-Web 13.1 for cyclone IV family.
 
 Because the 13.1 installer needs an X11 server this is currently a multiple
 step process, with user intervention. The make file will build an image
-with the Quartus distribution. This image should be run _see below_
-the example below will run the installer and then Quartus to answer the startup
-question so it will not be presented every time Quartus is started.
+with the Quartus distribution. Then this image will be run and the installer
+will be run and the Quartus will be run once to answer startup questions.
 
 The second step of the *image_built* target will run the Quartus installer in
-the intermediate container and the start Quartus. The installer runs in unattended mode but does require the Xserver to display progress bars (why i don't
+the intermediate container and the start Quartus. The installer runs in
+unattended mode but does require the Xserver to display progress bars (why I don't
 know). After the installer completes, it will run Quartus. The first run of
 Quartus asks a question that I find annoying. Two questions are asked the first
-one answer as you like, the second has three options, select
-**Run the Quartus...** Answer this question and then exit Quartus. Following
-completion run **docker commit** which will create a docker image (which will
-not ask the annoying startup question).
+question answer as you like, the second has three options, select
+**Run the Quartus...** click OK and then exit Quartus.
+
+Following make completion run **docker commit** which will create a docker
+image (which will not ask the annoying startup question).
 
 The final docker image can be run with the **quartus** command:
 ~~~~
