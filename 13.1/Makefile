@@ -22,6 +22,3 @@ ${INSTALLER}:
 clean:
 	rm image_built
 	-docker rmi -f quartus-installer:13.1
-
-distclean:	clean
-	rm CentosOS-Base.repo
