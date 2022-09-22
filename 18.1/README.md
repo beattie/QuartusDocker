@@ -10,7 +10,7 @@ quartus() {
   -v /dev/bus/usb:/dev/bus/usb quartus:18.1
 }
 ~~~~
-If you find the startup question like I do do the following (for some reason I can't
+If you find the startup question anoying like I do, do the following (for some reason I can't
 do this from make.):
 ~~~~
 docker tag quartus:18.1 quartus:intermediate
