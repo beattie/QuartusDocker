@@ -4,13 +4,7 @@ FROM ubuntu:16.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ARG REALUSER
-
-ARG QUARTUS=QuartusLiteSetup-18.1.0.625-linux.run
-ARG CYCLONE=cyclone-18.1.0.625.qdz
-
-COPY $QUARTUS /$QUARTUS
-COPY $CYCLONE /$CYCLONE
+ADD Quartus-lite-18.1.0.625-linux.tar /quartus
 
 RUN apt-get update && \
     apt-get -y -qq install apt-utils sudo && \
@@ -24,13 +18,11 @@ RUN apt-get update && \
                            libfontconfig1:amd64 \
                            libxext6:amd64 \
                            libpng12-0:amd64 \
-                           xterm:amd64 && \
-    chmod 755 /$QUARTUS
+                           xterm:amd64
 
 # create a normal user so we're not running as root
 RUN export uid=1000 gid=1000 && \
     mkdir -p /home/developer && \
-    mkdir -p /home/$REALUSER && \
     echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
     echo "developer:x:${uid}:" >> /etc/group && \
     echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
@@ -42,10 +34,8 @@ USER developer
 ENV HOME /home/developer
 # install quartus as the user (not root)
 RUN sudo mkdir -p /opt/intelFPGA_lite && \
-	sudo chmod a+w /opt/intelFPGA_lite && \
-	/$QUARTUS --mode unattended --installdir /opt/intelFPGA_lite --accept_eula 1 && \
-    sudo rm -f /$QUARTUS && \
-    sudo rm -f /$CYCLONE
+	sudo chmod a+w /opt/intelFPGA_lite
+RUN /quartus/setup.sh --mode unattended --installdir /opt/intelFPGA_lite --accept_eula 1
 
 # run from xterm to capture any stdio logging (not sure there is any, but can't hurt)
 #CMD xterm -e "/home/developer/altera_lite/quartus/bin/quartus --64bit"
