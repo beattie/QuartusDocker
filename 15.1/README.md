@@ -6,7 +6,7 @@ Build an image for Quartus-Lite 15.1
 docker run --rm -it  -v ${HOME}:${HOME} -v /tmp/.X11-unix:/tmp/.X11-unix \
 	-v /sys:/sys:ro -e DISPLAY -e "QT_X11_NO_MITSHM=1" --privileged \
 	quartus:15.1	
-}
+
 ~~~~
 If you find the startup question anoying like I do, do the following (for some reason I can't
 do this from make.):
